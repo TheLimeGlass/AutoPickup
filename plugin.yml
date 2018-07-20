@@ -1,0 +1,6 @@
+name: AutoPickup
+author: LimeGlass
+version: 1.0
+main: me.limeglass.autopickup.AutoPickup
+description: A WorldGaurd flag for auto picking up blocks.
+depend: [WorldGuard]
