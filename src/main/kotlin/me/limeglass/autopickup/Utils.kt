@@ -1,9 +1,12 @@
 package me.limeglass.autopickup
+
 import org.bukkit.ChatColor
 import org.bukkit.Material
+import org.bukkit.block.Block
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
+import java.util.regex.Pattern
 
 object Utils {
 
@@ -29,13 +32,19 @@ object Utils {
             player.inventory.addItem(itemStack)
             true
         } else {
-            TODO("Add support for calling an event when the inventory is full")
-            player.sendMessage(colour("&cYour inventory is currently full!"))
             false
         }
     }
 
-    private fun colour(input: String): String {
+    fun colour(input: String): String {
         return ChatColor.translateAlternateColorCodes('&', input);
+    }
+
+    fun placeholder(string: String, player: Player, block: Block): String {
+        var input = string
+        input = input.replace(Pattern.quote("{PLAYER}"), player.name)
+        input = input.replace(Pattern.quote("{PREFIX}"), AutoPickup.getConfig().getString("prefix"))
+        input = input.replace(Pattern.quote("{BLOCK}"), block.type.toString().toLowerCase().replace("_", " "))
+        return input
     }
 }

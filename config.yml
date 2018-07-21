@@ -1,0 +1,23 @@
+# The configuration file for AutoPickup
+
+prefix: "&7[&cAuto-Pickup&] &r"
+
+# Define what is displayed to the user when their inventory is full and can't have any items added.
+inventory-full:
+    # Should an Actionbar be displayed to the user?
+    actionbar:
+        enabled: true
+        message: "&c&lINVENTORY FULL"
+    # Should a message be displayed in chat to the user?
+    chat:
+        enabled: true
+        message: "&cYour inventory is currently full!"
+    # Should a sound be played to the user?
+    # Sound list for 1.9+ https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+    sound:
+        enabled: true
+        sound: ENTITY_VILLAGER_NO
+        # Pitch at -1 will result in a random pitch.
+        pitch: 3
+        # Volume ranges from 0 to 1 in decimal form.
+        volume: 1

@@ -1,5 +1,8 @@
 package me.limeglass.autopickup
 import com.sk89q.worldguard.protection.flags.StateFlag
+import me.limeglass.autopickup.events.AutoPickupEvent
+import me.limeglass.autopickup.events.PickupFullEvent
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
@@ -25,7 +28,6 @@ class PickupListener(private val plugin: AutoPickup) : Listener {
         }
     }
 
-
     @EventHandler
     fun onNewBreak(event: BlockBreakEvent) {
         if (event.isCancelled) return
@@ -49,8 +51,9 @@ class PickupListener(private val plugin: AutoPickup) : Listener {
             if (canFit) {
                 block.drops.clear()
                 block.type = Material.AIR
+                Bukkit.getPluginManager().callEvent(AutoPickupEvent(event.player, block))
             } else {
-                //TODO Call an event and add configurations for this.
+                Bukkit.getPluginManager().callEvent(PickupFullEvent(event.player, block))
                 event.isCancelled = true
             }
         }
